@@ -11,7 +11,9 @@ from .models import Lead
 
 def index(request):
     """Serve the intake form + results page."""
-    return render(request, 'leads/index.html', {})
+    return render(request, 'leads/index.html', {
+        'api_key': settings.GROQ_API_KEY,
+    })
 
 
 # ── REST API ───────────────────────────────────────────────────────────────────

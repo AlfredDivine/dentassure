@@ -1,7 +1,7 @@
 # DentAssure — UK Dental Indemnity Risk Assessment System (Django)
 
 **Author:** Alfred Divine  
-**Stack:** Python · Django · SQLite · Groq 
+**Stack:** Python · Django · SQLite · Groq API  
 **Task:** AIA Candidate Practical Test — UK Dental Indemnity Build
 
 ---
@@ -13,7 +13,7 @@ User fills form → JS calls Groq API → AI returns JSON risk result
 → Django POST /api/leads saves to SQLite → Result displayed → Table refreshes
 ```
 
----
+--- 
 
 ## Setup & Run
 
@@ -22,13 +22,13 @@ User fills form → JS calls Groq API → AI returns JSON risk result
 pip install django
 ```
 
-### 2. Set your Anthropic API key
+### 2. Set your Groq API key
 ```bash
 # Mac/Linux
-export Groq_API_KEY="gsk-your-key-here"
+export GROQ_API_KEY="gsk-your-key-here"
 
 # Windows
-set Groq_API_KEY=gsk-your-key-here
+set GROQ_API_KEY=gsk-your-key-here
 ```
 
 ### 3. Apply migrations
@@ -95,7 +95,7 @@ python manage.py createsuperuser
 ## Design Decisions
 
 - **Django ORM** — Lead model with proper field types and choices; JSONField for risk_factors
-- **Template rendering** — API key injected via Django context (`{{ api_key }}`) from settings
+- **Environment variables** — Groq API key stored in `.env` file via `django-environ`, injected into the template via Django context (`{{ api_key }}`). Never hardcoded or committed to version control.
 - **CSRF** — Django CSRF token read from cookie and sent with POST via `X-CSRFToken` header
 - **SQLite** — zero-config for POC; swap to PostgreSQL in production via `settings.py`
 - **Single app architecture** — clean `leads` app handles models, views, URLs, and templates
@@ -103,4 +103,4 @@ python manage.py createsuperuser
 ---
 
 ## Time Taken
-~5 hours (design + build + test)
+~3 hours (design + build + test)

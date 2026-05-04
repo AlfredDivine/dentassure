@@ -378,8 +378,8 @@
 </div>
 
 <script>
-// Paste your Groq API key here — get it free at console.groq.com
-const API_KEY = "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";
+// Groq API key injected from .env via Django settings
+const API_KEY = "{{ api_key }}";
 
 async function classifyRisk(fd) {
   const prompt = `You are an expert UK dental indemnity insurance underwriter.

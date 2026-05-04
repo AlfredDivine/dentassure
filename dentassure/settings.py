@@ -1,7 +1,17 @@
 from pathlib import Path
-import os
+import environ
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Read .env file
+env = environ.Env()
+environ.Env.read_env(BASE_DIR / '.env', overwrite=True)
+ 
+# Debug: confirm .env is found
+import os
+_env_path = BASE_DIR / '.env'
+if not _env_path.exists():
+    raise FileNotFoundError(f'.env file not found at {_env_path}')
 
 SECRET_KEY = 'django-insecure-dentassure-dev-key-change-in-production'
 
@@ -63,5 +73,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Groq API Key — loaded from .env file
+GROQ_API_KEY = env('GROQ_API_KEY', default='')
 
 
