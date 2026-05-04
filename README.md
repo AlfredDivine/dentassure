@@ -103,4 +103,4 @@ python manage.py createsuperuser
 ---
 
 ## Time Taken
-~3 hours (design + build + test)
+~5 hours (design + build + test)
